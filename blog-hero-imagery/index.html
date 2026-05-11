@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Blog hero imagery patterns — SaaS blog research</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://rsms.me/">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #18181b;
+    --muted: #52525b;
+    --subtle: #a1a1aa;
+    --rule: #e4e4e7;
+    --surface: #fafafa;
+    --code-bg: #f4f4f5;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
+    font-size: 16px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 80px 24px 120px; }
+  header.page-header { margin-bottom: 48px; }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin: 0 0 10px;
+  }
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    margin: 64px 0 16px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin: 36px 0 12px;
+  }
+  .page-header .meta { color: var(--muted); font-size: 14px; margin: 0; }
+  p { margin: 0 0 16px; }
+  ul, ol { padding-left: 22px; margin: 0 0 16px; }
+  ul li, ol li { margin: 4px 0; }
+  a {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s;
+  }
+  a:hover { text-decoration-color: var(--text); }
+  code {
+    background: var(--code-bg);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  }
+  blockquote {
+    border-left: 2px solid var(--rule);
+    padding-left: 16px;
+    margin: 20px 0;
+    color: var(--muted);
+  }
+  table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14.5px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-weight: 600; }
+  td { color: var(--muted); }
+  strong { font-weight: 600; color: var(--text); }
+  hr { border: none; border-top: 1px solid var(--rule); margin: 48px 0; }
+
+  figure {
+    margin: 24px 0;
+    padding: 0;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  figure img { width: 100%; height: auto; display: block; }
+  figcaption {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 12px 16px;
+    border-top: 1px solid var(--rule);
+    background: var(--bg);
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .featured { margin: 24px 0 32px; }
+  .featured figure { border: 2px solid #18181b; border-radius: 12px; }
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+  .option {
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+  }
+  .option.pick { border-color: #18181b; }
+  .option .opt-num {
+    display: inline-block;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 2px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 8px;
+    letter-spacing: 0.04em;
+  }
+  .option.pick .opt-num { background: #18181b; color: #fff; border-color: #18181b; }
+  .option h3 { margin-top: 0; display: inline; }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--subtle);
+    font-size: 13px;
+    text-decoration: none;
+    margin-bottom: 32px;
+  }
+  .back-link:hover { color: var(--text); }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 56px 20px 80px; }
+    h1 { font-size: 32px; }
+    h2 { font-size: 22px; margin-top: 48px; padding-top: 24px; }
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back-link" href="../">← Design research</a>
+
+<header class="page-header">
+  <p class="eyebrow">Research</p>
+  <h1>Blog hero imagery patterns</h1>
+  <p class="meta">May 11, 2026 · Cursor · Ramp · Retool · Vercel · Resend · Linear · Anthropic</p>
+</header>
+
+<p><strong>Goal:</strong> decide what (if anything) goes above the title on a Highlight blog post, with a specific recommendation for the new "How to build agentic chat with Durable Objects" post.</p>
+
+<p><strong>Method:</strong> 14 above-the-fold screenshots from 7 SaaS blogs.</p>
+
+<h2>Two camps</h2>
+
+<p>After looking at the captures, every SaaS blog post falls into one of two approaches:</p>
+
+<h3>Camp A — No hero image, the title <em>is</em> the hero</h3>
+<p>Used by: Vercel (every post), Cursor's text-heavy posts.</p>
+<p>The post opens with: huge bold title → author byline → straight into copy. On the index, posts get a small monogram glyph (triangle for product, <code>{f}</code> for engineering, octagon for press).</p>
+
+<div class="grid-2">
+  <figure><img src="references/vercel-durable-hero.png" alt="Vercel — A new programming model for durable execution"/><figcaption>Vercel — durable execution post, no hero image</figcaption></figure>
+  <figure><img src="references/vercel-blog-index.png" alt="Vercel blog index"/><figcaption>Vercel index — monogram glyphs replace cover images</figcaption></figure>
+</div>
+
+<p><strong>Why it works:</strong> signals "this is a serious piece of writing". No image-sourcing tax. Index page gets visual rhythm from glyphs, not full art.</p>
+
+<h3>Camp B — Strong hero, image carries half the meaning</h3>
+<p>Used by: Cursor essays, Ramp, Retool/cache, Resend, Linear, Anthropic.</p>
+
+<table>
+  <thead><tr><th>Style</th><th>Examples</th><th>When it fits</th></tr></thead>
+  <tbody>
+    <tr><td>Abstract photo / texture</td><td>Cursor "third era"</td><td>thought-leadership essays, no obvious subject</td></tr>
+    <tr><td>Product UI mock (small/dark)</td><td>Linear "Now" cards</td><td>product launches, changelog entries</td></tr>
+    <tr><td>Photo of person/team</td><td>Cursor 3, Ramp midday</td><td>announcements, profiles, customer stories</td></tr>
+    <tr><td>Bold typography poster</td><td>Resend launch-week</td><td>brand moments, launches</td></tr>
+    <tr><td>Hand-drawn illustration</td><td>Anthropic newsroom</td><td>research, technical-meets-human</td></tr>
+    <tr><td>Magazine illustration</td><td>Retool "Code is free"</td><td>provocative essays, opinion</td></tr>
+  </tbody>
+</table>
+
+<div class="grid-2">
+  <figure><img src="references/cursor-third-era-hero.png" alt="Cursor third era hero"/><figcaption>Cursor — abstract photo on light cream</figcaption></figure>
+  <figure><img src="references/cursor-3-hero.png" alt="Cursor 3 hero"/><figcaption>Cursor — person photo as hero</figcaption></figure>
+  <figure><img src="references/ramp-midday-hero.png" alt="Ramp midday hero"/><figcaption>Ramp — full-bleed people photo</figcaption></figure>
+  <figure><img src="references/ramp-trillion-hero.png" alt="Ramp trillion hero"/><figcaption>Ramp — magazine-style hero photo</figcaption></figure>
+  <figure><img src="references/resend-blog-index.png" alt="Resend blog index"/><figcaption>Resend — vintage typography posters</figcaption></figure>
+  <figure><img src="references/linear-blog-index.png" alt="Linear blog index"/><figcaption>Linear "Now" — tiny dark product mocks</figcaption></figure>
+  <figure><img src="references/anthropic-news-index.png" alt="Anthropic newsroom"/><figcaption>Anthropic — hand-drawn illustration mosaic</figcaption></figure>
+  <figure><img src="references/retool-code-free-hero.png" alt="Retool code is free hero"/><figcaption>Retool/cache — loud 3D collage (foil)</figcaption></figure>
+</div>
+
+<h2>What's worth borrowing</h2>
+
+<p>For Highlight's blog (clean, light, sans, narrow column), the strongest fits are:</p>
+<ol>
+  <li><strong>Vercel's pure-text approach</strong> — simplest, hardest to get wrong, scales as we add posts. On the index, attach a small monogram or category glyph instead of an image.</li>
+  <li><strong>Cursor's abstract textures</strong> — used when the post is conceptual. Photographic, neutral palette, lives well on light cream.</li>
+  <li><strong>Linear's tiny product mocks</strong> — small dark thumbnails of the actual product/diagram. Great for technical posts because the image IS the diagram.</li>
+</ol>
+
+<p>What to <strong>avoid</strong>:</p>
+<ul>
+  <li>Retool/cache style (loud magazine art) — clashes with the clean light direction we just shipped.</li>
+  <li>Resend's massive type posters — fun but they need a brand-illustration system we don't have.</li>
+  <li>Stock photos of laptops, code, abstract tech — every dev blog uses these. They read as filler.</li>
+</ul>
+
+<h2>Recommendations for Highlight</h2>
+
+<div class="callout">
+  <p><strong>Default policy: Camp A (no hero image)</strong>, with the option to add one when a specific post earns it.</p>
+  <p>Most posts go up faster. Engineering posts especially don't <em>need</em> art at the top. The "what if the image is bad" worry disappears.</p>
+</div>
+
+<p><strong>When to add a hero image:</strong></p>
+<ul>
+  <li>The post has a real, photogenic subject (a person, an event, a product launch).</li>
+  <li>We have a strong custom illustration or diagram already — don't go searching for one.</li>
+  <li>It's a launch/announcement and we want the visual punch.</li>
+</ul>
+
+<p>If we do add an image, default to one of two styles:</p>
+<ol>
+  <li><strong>Custom diagram from the post itself</strong>, framed in a soft card (Linear style). Especially for engineering posts where the architecture <em>is</em> the story.</li>
+  <li><strong>Abstract photo or render</strong> in a neutral palette (Cursor third-era style). Stays calm, doesn't compete with the title.</li>
+</ol>
+
+<h2>Specific recommendation: the Durable Objects post</h2>
+
+<p>The post is a technical deep-dive with code, a diagram, and an architectural narrative. <strong>Closest analog in the wild: Vercel's "A new programming model for durable execution"</strong> (also durable-execution-themed, also tech-heavy) — and Vercel uses no hero image at all. Just title → author → text.</p>
+
+<div class="featured">
+  <figure><img src="references/vercel-durable-hero.png" alt="Vercel's durable execution post — no hero image"/><figcaption>Vercel — the closest parallel in the wild. No hero image. Title carries it.</figcaption></figure>
+</div>
+
+<p>That's the strongest signal: for this exact category of post, no image is the industry default and it works.</p>
+
+<div class="option pick">
+  <h3><span class="opt-num">Option 1 · my pick</span>No hero image</h3>
+  <p>Just title + author + read time + straight into the post. Already supported by our current <code>BlogPostImage</code> component returning <code>null</code> when there's no <code>coverImage</code> in frontmatter. The post is already wired this way — leave it.</p>
+  <p><strong>Why this wins:</strong> matches Vercel exactly, ships immediately, looks confident. The architecture diagram referenced in the post becomes the first image users see, in-context, which is more useful than a decorative cover.</p>
+</div>
+
+<div class="option">
+  <h3><span class="opt-num">Option 2</span>Architecture diagram as hero</h3>
+  <p>Take the existing structure diagram the post already references (currently a TODO placeholder) and elevate it: clean it up in Figma, export at 1600×900 with generous white space, soft drop shadow, neutral palette. Frame it in a light gray card like Linear does.</p>
+  <p><strong>Why:</strong> turns the educational asset into the cover. Doubles as the in-post diagram. No extra creative work beyond polishing what we need anyway.</p>
+  <p><strong>Recipe:</strong> white/light-gray background → minimal node boxes (Worker, ChatObject, SQLite) → connecting lines with subtle arrows → labels in IBM Plex Sans → no shadows, no color (or a single accent on the data path).</p>
+</div>
+
+<div class="option">
+  <h3><span class="opt-num">Option 3</span>Abstract texture / render</h3>
+  <p>A neutral abstract image conveying "durability" or "distributed compute" without being literal:</p>
+  <ul>
+    <li><strong>Fiber-optic strands</strong> (long-exposure photo, dark navy or warm gray) — fits "globally distributed".</li>
+    <li><strong>Subtle 3D render of nested boxes</strong> (one large, many small) — visual metaphor for "single Durable Object instance with co-located storage".</li>
+    <li><strong>Cursor "third-era" style</strong> — single thin white wire on a dark muted backdrop, abstract motion.</li>
+  </ul>
+  <p><strong>Why:</strong> feels most like a destination editorial site. But requires sourcing or commissioning. Post ships fine without it.</p>
+</div>
+
+<div class="callout">
+  <p><strong>My call:</strong> ship with option 1 today, replace with option 2 once someone has a free hour in Figma. Don't block the post on imagery.</p>
+</div>
+
+</div>
+</body>
+</html>
