@@ -1,34 +1,148 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"/>
+<html lang="en"><head>
+<meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Design research — vasudev-io</title>
+<link rel="preconnect" href="https://rsms.me/">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
-  :root { --text:#1a1a1a; --muted:#5a5a5a; --rule:#e6e6e6; --bg:#fafaf8; --accent:#00C3FF; }
-  html, body { background: var(--bg); color: var(--text); }
-  body { font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
-          max-width: 760px; margin: 60px auto; padding: 0 24px 80px; }
-  h1 { font-family: "Iowan Old Style","Charter","Georgia",serif;
-        font-weight: 500; letter-spacing: -0.01em; font-size: 40px; line-height: 1.15; margin: 0 0 8px; }
-  .lead { color: var(--muted); margin-bottom: 48px; }
-  ul { list-style: none; padding: 0; margin: 0; }
-  li { border-top: 1px solid var(--rule); }
-  li:last-child { border-bottom: 1px solid var(--rule); }
-  li a { display: block; padding: 20px 0; text-decoration: none; color: var(--text); }
-  li a:hover .entry-title { color: var(--accent); }
-  .entry-title { font-weight: 500; font-size: 18px; transition: color 0.15s; }
-  .entry-meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
-  .entry-summary { color: var(--muted); margin: 8px 0 0; font-size: 14.5px; }
-  .empty { padding: 20px 0; color: var(--muted); }
-  footer { margin-top: 80px; color: var(--muted); font-size: 13px; }
-  footer a { color: var(--muted); }
+  :root {
+    --bg: #ffffff;
+    --text: #18181b;
+    --muted: #52525b;
+    --subtle: #a1a1aa;
+    --rule: #e4e4e7;
+    --accent: #18181b;
+    --hover: #fafafa;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 96px 24px 120px; }
+  header { margin-bottom: 64px; }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    margin: 0 0 16px;
+  }
+  .lead {
+    color: var(--muted);
+    font-size: 17px;
+    max-width: 540px;
+    margin: 0;
+  }
+  .entries {
+    border-top: 1px solid var(--rule);
+  }
+  .entry {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid var(--rule);
+    padding: 24px 16px;
+    margin: 0 -16px;
+    transition: background 0.15s;
+    border-radius: 0;
+  }
+  .entry:hover {
+    background: var(--hover);
+  }
+  .entry-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    justify-content: space-between;
+  }
+  .entry-main { flex: 1; min-width: 0; }
+  .entry-title {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    color: var(--text);
+  }
+  .entry-summary {
+    color: var(--muted);
+    font-size: 14.5px;
+    margin-top: 6px;
+    max-width: 540px;
+  }
+  .entry-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .entry-date {
+    color: var(--subtle);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+  .entry-arrow {
+    color: var(--subtle);
+    font-size: 16px;
+    transition: transform 0.15s, color 0.15s;
+  }
+  .entry:hover .entry-arrow {
+    color: var(--text);
+    transform: translateX(2px);
+  }
+  .empty { color: var(--muted); padding: 24px 0; }
+  footer {
+    margin-top: 80px;
+    color: var(--subtle);
+    font-size: 13px;
+  }
+  footer a {
+    color: var(--subtle);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  footer a:hover { color: var(--text); border-bottom-color: var(--rule); }
+  @media (max-width: 600px) {
+    .wrap { padding: 56px 20px 80px; }
+    h1 { font-size: 36px; }
+    .entry { padding: 20px 12px; margin: 0 -12px; }
+    .entry-row { gap: 16px; }
+  }
 </style></head>
 <body>
-<h1>Design research</h1>
-<p class="lead">UI/UX research reports — patterns, competitive analysis, references.</p>
-<ul>
-<li><a href="./blog-editorial-patterns/"><div class="entry-title">Blog patterns research — Ramp, Cursor, Retool</div><div class="entry-meta">2026-05-11 · /blog-editorial-patterns</div><p class=entry-summary>Goal:: ground a restyle of `/resources` (currently aeonik + brandYellow + dark cards) into the new editorial style established on `/mission` and `/about` (Instrument Serif, IBM Plex Sans, AnimatedHighlight, 674px column, soft black/70).</p></a></li>
-</ul>
-<footer>
-  Source: <a href="https://github.com/vasudev-io/design-research">github.com/vasudev-io/design-research</a>
-</footer>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Vasudev Menon</p>
+    <h1>Design research</h1>
+    <p class="lead">UI/UX research reports — competitive analysis, pattern libraries, references.</p>
+  </header>
+  <section class="entries">
+      <a class="entry" href="./blog-editorial-patterns/">
+        <div class="entry-row">
+          <div class="entry-main">
+            <div class="entry-title">Blog patterns research — Ramp, Cursor, Retool</div>
+            <div class="entry-summary">ground a restyle of /resources (currently aeonik + brandYellow + dark cards) into the new editorial style established on /mission and /about (Instrument Serif, IBM Plex Sans, AnimatedHighlight, 674px column, soft black/70).</div>
+          </div>
+          <div class="entry-meta">
+            <span class="entry-date">May 11, 2026</span>
+            <span class="entry-arrow" aria-hidden="true">→</span>
+          </div>
+        </div>
+      </a>
+  </section>
+  <footer>
+    Source · <a href="https://github.com/vasudev-io/design-research">github.com/vasudev-io/design-research</a>
+  </footer>
+</div>
 </body></html>

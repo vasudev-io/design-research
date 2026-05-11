@@ -2,57 +2,174 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Blog patterns research — Ramp, Cursor, Retool (2026-05-11)</title>
+<title>Blog patterns research — Ramp, Cursor, Retool</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://rsms.me/">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
   :root {
-    --text: #1a1a1a;
-    --muted: #5a5a5a;
-    --rule: #e6e6e6;
-    --surface: #fafaf8;
-    --accent: #00C3FF;
+    --bg: #ffffff;
+    --text: #18181b;
+    --muted: #52525b;
+    --subtle: #a1a1aa;
+    --rule: #e4e4e7;
+    --surface: #fafafa;
+    --code-bg: #f4f4f5;
   }
-  html, body { background: var(--surface); color: var(--text); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
-    line-height: 1.6;
-    max-width: 880px;
-    margin: 40px auto;
-    padding: 0 24px 80px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
     font-size: 16px;
   }
-  h1, h2, h3 { font-family: "Iowan Old Style", "Charter", "Georgia", serif; font-weight: 500; letter-spacing: -0.01em; }
-  h1 { font-size: 40px; line-height: 1.15; margin-bottom: 8px; }
-  h2 { font-size: 28px; margin-top: 56px; margin-bottom: 12px; border-top: 1px solid var(--rule); padding-top: 32px; }
-  h3 { font-size: 20px; margin-top: 32px; margin-bottom: 8px; }
-  .meta { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
-  p, li { color: var(--text); }
-  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
-  a:hover { border-bottom-color: var(--accent); }
-  code { background: #efeeea; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
-  pre { background: #efeeea; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 13px; line-height: 1.5; }
-  pre code { background: transparent; padding: 0; }
-  blockquote { border-left: 3px solid var(--accent); padding-left: 16px; margin: 16px 0; color: var(--muted); }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
-  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
-  th { font-weight: 600; background: #f3f2ee; }
-  figure { margin: 24px 0; padding: 16px; background: white; border: 1px solid var(--rule); border-radius: 12px; }
-  figure img { width: 100%; height: auto; display: block; border-radius: 8px; }
-  figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; text-align: center; }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
-  .ref-section { margin-top: 56px; }
-  details { margin: 8px 0; }
-  summary { cursor: pointer; font-weight: 500; padding: 8px 0; }
-  hr { border: none; border-top: 1px solid var(--rule); margin: 32px 0; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 80px 24px 120px; }
+  header.page-header { margin-bottom: 48px; }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin: 0 0 10px;
+  }
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    margin: 64px 0 16px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin: 40px 0 12px;
+  }
+  .page-header .meta {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0;
+  }
+  p { margin: 0 0 16px; color: var(--text); }
+  ul, ol { padding-left: 22px; margin: 0 0 16px; }
+  ul li, ol li { margin: 4px 0; }
+  a {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s;
+  }
+  a:hover { text-decoration-color: var(--text); }
+  code {
+    background: var(--code-bg);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  }
+  pre {
+    background: var(--code-bg);
+    padding: 16px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13.5px;
+    line-height: 1.6;
+    border: 1px solid var(--rule);
+    margin: 20px 0;
+  }
+  pre code { background: transparent; padding: 0; border-radius: 0; font-size: inherit; }
+  blockquote {
+    border-left: 2px solid var(--rule);
+    padding-left: 16px;
+    margin: 20px 0;
+    color: var(--muted);
+  }
+  blockquote p { margin: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14.5px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  th {
+    font-weight: 600;
+    color: var(--text);
+    border-bottom: 1px solid #d4d4d8;
+  }
+  td { color: var(--muted); }
+  strong { font-weight: 600; color: var(--text); }
+  hr { border: none; border-top: 1px solid var(--rule); margin: 48px 0; }
+
+  figure {
+    margin: 24px 0;
+    padding: 0;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  figure img { width: 100%; height: auto; display: block; }
+  figcaption {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 12px 16px;
+    border-top: 1px solid var(--rule);
+    background: var(--bg);
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 720px) {
+    .wrap { padding: 56px 20px 80px; }
+    h1 { font-size: 32px; }
+    h2 { font-size: 22px; margin-top: 48px; padding-top: 24px; }
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--subtle);
+    font-size: 13px;
+    text-decoration: none;
+    margin-bottom: 32px;
+  }
+  .back-link:hover { color: var(--text); }
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<h1>Blog patterns research</h1>
-<p class="meta">2026-05-11 · Ramp · Cursor · Retool · for the <code>/resources</code> editorial restyle</p>
+<a class="back-link" href="../">← Design research</a>
 
-<p><strong>Goal:</strong> ground a restyle of <code>/resources</code> (currently aeonik + brandYellow + dark cards) into the new editorial style established on <code>/mission</code> and <code>/about</code> (Instrument Serif, IBM Plex Sans, AnimatedHighlight, 674px column, soft <code>black/70</code>).</p>
+<header class="page-header">
+  <p class="eyebrow">Research</p>
+  <h1>Blog patterns research</h1>
+  <p class="meta">May 11, 2026 · Ramp · Cursor · Retool · informs the <code>/blog</code> editorial restyle</p>
+</header>
+
+<p><strong>Goal:</strong> ground a restyle of the blog into a clean, light, sans-only editorial style.</p>
 
 <p><strong>Method:</strong> 11 full-page screenshots via headless chromium across 3 reference sites (index + at least one post each, plus Cursor's changelog).</p>
 
@@ -91,105 +208,53 @@
     <tr><td>Category/topic chip above title</td><td>✓</td><td>—</td><td>✓</td><td><strong>yes</strong></td></tr>
     <tr><td>Author photo + name + date + read time row</td><td>✓</td><td>✓</td><td>✓</td><td><strong>yes</strong></td></tr>
     <tr><td>Cover image full-width inside reading column</td><td>✓</td><td>✓</td><td>✓</td><td><strong>yes</strong></td></tr>
-    <tr><td>Narrow centered column (≤ 720px)</td><td>✓</td><td>—</td><td>—</td><td><strong>yes</strong> — match mission's 674px</td></tr>
-    <tr><td>Drop-cap first paragraph</td><td>✓</td><td>—</td><td>—</td><td><strong>yes, subtle</strong></td></tr>
+    <tr><td>Narrow centered column (≤ 720px)</td><td>✓</td><td>—</td><td>—</td><td><strong>yes</strong></td></tr>
     <tr><td>Sticky left rail (TOC + author)</td><td>—</td><td>✓</td><td>✓</td><td>defer — only 1 post, low payoff</td></tr>
     <tr><td>Related posts grid at footer</td><td>✓</td><td>✓</td><td>✓</td><td><strong>yes</strong></td></tr>
     <tr><td>Category filter chips on index</td><td>✓</td><td>—</td><td>✓</td><td><strong>yes</strong></td></tr>
     <tr><td>Dense cluster-by-topic index</td><td>—</td><td>✓</td><td>—</td><td>no — overkill for our volume</td></tr>
     <tr><td>Tabular post list under featured</td><td>✓</td><td>—</td><td>—</td><td><strong>yes, eventually</strong></td></tr>
     <tr><td>Search input on index</td><td>✓</td><td>—</td><td>—</td><td>defer</td></tr>
-    <tr><td>Dark background</td><td>—</td><td>—</td><td>✓</td><td>no — continuity with mission/about</td></tr>
+    <tr><td>Dark background</td><td>—</td><td>—</td><td>✓</td><td>no — light only</td></tr>
   </tbody>
 </table>
 
 <h2>Recommended scaffold</h2>
 
-<p>Treat <code>/resources</code> as an editorial column. Three intents:</p>
+<p>Treat the blog as an editorial column. Three intents:</p>
 <ol>
-  <li><strong>Match the new editorial language.</strong> Instrument Serif headings, IBM Plex Sans body, <code>text-black/70 dark:text-light-80</code>, AnimatedHighlight for inline emphasis, SectionDivider gradient bars. No <code>brandYellow</code> chrome — use <code>highlight-cyan</code> / <code>highlight-pink</code> / <code>highlight-gold</code>.</li>
-  <li><strong>Keep authoring dead-simple.</strong> A new post is still: drop an <code>.mdx</code> into <code>src/content/blog/</code>, fill frontmatter, done. The MDX components map handles styling. Authors can opt-in to <code>&lt;Highlight variant="cyan"&gt;term&lt;/Highlight&gt;</code> for inline emphasis directly inside MDX.</li>
-  <li><strong>Plan for growth without over-engineering today.</strong> Featured 2-up grid + all-posts grid is enough until ~8 posts. Then add Cursor's tabular fallback.</li>
+  <li><strong>Clean, light, sans-only.</strong> Inter or aeonik headings, IBM Plex Sans body, neutral grays. No serifs, no brand-yellow chrome, no dark cards.</li>
+  <li><strong>Authoring stays dead-simple.</strong> A new post is: drop an <code>.mdx</code> into <code>src/content/blog/</code>, fill frontmatter, done. The MDX components map handles styling.</li>
+  <li><strong>Plan for growth without over-engineering today.</strong> Featured 2-up grid + all-posts grid below is enough until ~8 posts. Then add Cursor's tabular fallback.</li>
 </ol>
 
 <h3>Component-by-component changes</h3>
 <table>
   <thead><tr><th>Component</th><th>Today</th><th>Target</th></tr></thead>
   <tbody>
-    <tr><td><code>BlogHero</code></td><td>aeonik "Resources"</td><td>Instrument Serif <em>Field notes</em> with italic emphasis. Sub-line in Instrument Sans. SectionDivider underneath.</td></tr>
-    <tr><td><code>BlogCategories</code></td><td>grid of dark cards, no filter UI</td><td>Real filter chip row at top, plus the grid. Restyled cards.</td></tr>
-    <tr><td><code>BlogPostCard</code></td><td>dark <code>bg-light-5</code> rounded card, aeonik</td><td>Image on top with <code>rounded-lg</code>, category chip + read time, Instrument Serif title, IBM Plex Sans excerpt, byline. Hover: subtle title shift to <code>highlight-cyan</code>.</td></tr>
-    <tr><td><code>BlogPostHeader</code></td><td>aeonik title, brandYellow chip outline</td><td>Centered. Category chip with subtle border. Instrument Serif title (clamp 32–56px). Instrument Sans excerpt. Author row centered.</td></tr>
-    <tr><td><code>BlogPostImage</code></td><td>bare <code>rounded-lg</code> image</td><td>Wrapped to 674px column on sm, wider on lg. Optional caption via <code>coverCaption</code> frontmatter.</td></tr>
-    <tr><td><code>BlogPostContent</code></td><td>aeonik headings, brandYellow accent, <code>prose-invert</code></td><td>Rewrite MDX map. H1/H2/H3 Instrument Serif (italic ok). Body IBM Plex Sans, <code>text-black/70 dark:text-light-80</code>, <code>leading-relaxed</code>. Blockquote: gradient left bar. Code: <code>bg-black/5 dark:bg-white/10</code>. Links: <code>highlight-cyan</code>. Drop cap on first paragraph.</td></tr>
-    <tr><td><code>BlogPostFooter</code></td><td>tags + fake share/bookmark + 2 links + footer chrome</td><td>Tags row only. Single back link. 2-up related posts (same category, fallback recent). No <code>bg-light-5</code> box.</td></tr>
+    <tr><td><code>BlogHero</code></td><td>aeonik "Resources"</td><td>Aeonik title + IBM Plex Sans sub-line. White bg.</td></tr>
+    <tr><td><code>BlogCategories</code></td><td>grid of dark cards, no filter UI</td><td>Filter chip row + featured 2-up + restyled grid.</td></tr>
+    <tr><td><code>BlogPostCard</code></td><td>dark card chrome, aeonik</td><td>Cover image on top, category chip, aeonik title, IBM Plex Sans excerpt, byline.</td></tr>
+    <tr><td><code>BlogPostHeader</code></td><td>aeonik title, brandYellow chip</td><td>Chip + aeonik title (clamp 32-48px) + author row.</td></tr>
+    <tr><td><code>BlogPostContent</code></td><td>aeonik headings, brandYellow accent, prose-invert</td><td>Aeonik headings, IBM Plex Sans body, zinc neutrals, syntax-highlighted code blocks.</td></tr>
+    <tr><td><code>BlogPostFooter</code></td><td>tags + fake share/bookmark + 2 links</td><td>Tags + "keep reading" 2-up + back link.</td></tr>
   </tbody>
 </table>
-
-<h3>Inline Highlight in MDX</h3>
-<p>Expose <code>AnimatedHighlight</code> in the MDX components map. Authors write:</p>
-<pre><code>We need to &lt;Highlight variant="cyan"&gt;quiet the noise&lt;/Highlight&gt; and get back our time.</code></pre>
-<p>One line in <code>BlogPostContent.tsx</code>: <code>Highlight: AnimatedHighlight</code>.</p>
 
 <h3>Frontmatter — no schema change</h3>
 <pre><code>---
 title: "..."
 excerpt: "..."          # used on cards + meta description
 date: "2026-05-11"
-author: "Vasudev Menon"
+author: "Highlight Team"
 authorImage: "..."      # optional
-category: "product"     # product | ai | engineering | student | company
+category: "engineering" # product | engineering | ai | company
 tags: ["..."]
 coverImage: "..."       # optional
 featured: false         # opt-in to 2-up hero grid
 readTime: 6             # optional, auto-calculated
 ---</code></pre>
 
-<h3>Index composition</h3>
-<pre><code>BlogHero (editorial title)
-  ↓
-SectionDivider (pink)
-  ↓
-[Featured row]  — up to 2 cards, larger, side-by-side. Hidden if none.
-  ↓
-[Filter chips] — All / Product / AI / Engineering / Student / Company
-  ↓
-[All-posts grid] — 3-col lg, 2-col md, 1-col sm
-  ↓
-SectionDivider (cyan)
-  ↓
-[Newsletter CTA] — optional, skip for v1</code></pre>
-
-<h3>Post composition</h3>
-<pre><code>Breadcrumb
-  ↓
-BlogPostHeader (chip, title, excerpt, author row) — centered, 674px max
-  ↓
-BlogPostImage (rounded, soft shadow)
-  ↓
-BlogPostContent (mdx, 674px column, drop cap on first &lt;p&gt;)
-  ↓
-SectionDivider (cyan)
-  ↓
-BlogPostFooter (tags, back link, related 2-up)</code></pre>
-
-<h2>Open questions</h2>
-<ol>
-  <li><strong>Naming</strong>: keep "Resources" or rebrand? <em>Recommendation:</em> "Field notes" — short, editorial, matches voice.</li>
-  <li><strong>Category taxonomy</strong>: define <code>product / engineering / ai / company / student</code> now before more posts.</li>
-  <li><strong>Featured flag</strong>: nominate existing post or wait?</li>
-  <li><strong>Newsletter capture</strong>: any newsletter URL? If not, skip block.</li>
-  <li><strong>Existing post</strong> is SEO-heavy and won't fit the editorial tone perfectly even after restyle. New default post should set the new tone.</li>
-</ol>
-
-<h2>Proposed new post</h2>
-<ul>
-  <li><strong>Title:</strong> <em>Notes from the coordination tax</em> — short reflective post, ~600-900 words.</li>
-  <li><strong>Category:</strong> <code>product</code></li>
-  <li><strong>Featured:</strong> <code>true</code></li>
-  <li><strong>Voice:</strong> mirrors the mission page — short paragraphs, AnimatedHighlight on 2–3 phrases, one SectionDivider, no SEO tables.</li>
-</ul>
-<p>Will draft once approved. <strong>Holding off on code until then.</strong></p>
-
+</div>
 </body>
 </html>

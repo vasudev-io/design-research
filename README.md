@@ -4,4 +4,4 @@ UI/UX research reports — see [the published index](https://vasudev-io.github.i
 
 ## Sessions
 
-- [Blog patterns research — Ramp, Cursor, Retool](./blog-editorial-patterns/) — 2026-05-11
+- [Blog patterns research — Ramp, Cursor, Retool](./blog-editorial-patterns/) — May 11, 2026
