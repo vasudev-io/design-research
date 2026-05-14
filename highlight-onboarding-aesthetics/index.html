@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design Research — Highlight Onboarding Aesthetics</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --fg: #1a1a1a;
+    --muted: #6b6b6b;
+    --border: #e5e5e5;
+    --accent: #2a2a2a;
+    --tl-bg: #eef4ff;
+    --tl-border: #b7ccef;
+    --code-bg: #f4f4f0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 32px 96px;
+  }
+  h1 { font-size: 36px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.02em; }
+  h2 { font-size: 24px; margin: 48px 0 12px; letter-spacing: -0.01em; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  h3 { font-size: 18px; margin: 28px 0 8px; }
+  p { margin: 0 0 14px; }
+  ul, ol { margin: 0 0 16px; padding-left: 24px; }
+  li { margin-bottom: 6px; }
+  a { color: #2954a5; text-decoration: underline; text-underline-offset: 2px; }
+  em { color: var(--muted); }
+  code, pre {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+  }
+  pre {
+    background: var(--code-bg);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    line-height: 1.45;
+  }
+  .tldr {
+    background: var(--tl-bg);
+    border: 1px solid var(--tl-border);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 18px 0 32px;
+  }
+  .tldr h2 {
+    border: none;
+    margin: 0 0 6px;
+    padding: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #2954a5;
+  }
+  figure { margin: 18px 0 28px; }
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    border: 1px solid var(--border);
+    display: block;
+  }
+  figcaption {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  .gallery figure { margin: 0; }
+  @media (max-width: 700px) {
+    .gallery { grid-template-columns: 1fr; }
+    main { padding: 32px 18px 64px; }
+    h1 { font-size: 28px; }
+  }
+  .rec {
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 16px;
+    margin: 24px 0;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Design Research: Highlight Desktop Onboarding Aesthetics</h1>
+<p class="meta">2026-05-13 · 6 steps reviewed · 13 sources</p>
+
+<div class="tldr">
+<h2>TL;DR</h2>
+<p>The current onboarding has solid bones (2-pane layout, stepper, well-considered permission priming) but reads as <strong>two visual languages fighting each other</strong>: a quiet productivity left pane vs. a marketing-landing right pane with a saturated blue gradient and a chartreuse CTA that hovers in no-man's-land. Premium peers (Linear, Vercel, Stripe, Raycast) win by <strong>picking one accent and using it for meaning only</strong>, treating the preview pane as <em>real product surface</em> rather than a decorative card on a gradient.</p>
+<p><strong>Three highest-leverage moves:</strong> kill the gradient hero, make the right pane an actual product preview, and turn the building step into a narrated indexing log.</p>
+</div>
+
+<h2>Current State</h2>
+<div class="gallery">
+  <figure>
+    <img src="references/current-state-1-login.png" alt="Login step">
+    <figcaption><strong>Step 1 — Login</strong> (browser dev mode redirected to a WorkOS error; the real screen has two buttons + terms).</figcaption>
+  </figure>
+  <figure>
+    <img src="references/current-state-2-profile.png" alt="Profile step">
+    <figcaption><strong>Step 2 — Profile.</strong> Left: name + role form. Right: nearly-empty "Welcome…" card on a blue gradient. Mostly empty space.</figcaption>
+  </figure>
+  <figure>
+    <img src="references/current-state-3-integrations.png" alt="Integrations step">
+    <figcaption><strong>Step 3 — Integrations.</strong> Left: skeleton integration grid. Right: a card with only the Highlight icon centered.</figcaption>
+  </figure>
+  <figure>
+    <img src="references/current-state-4-permissions-accessibility.png" alt="Accessibility permission step">
+    <figcaption><strong>Step 4 — Accessibility permission.</strong> Strongest screen in the flow. Real macOS Settings screenshot, numbered breadcrumb, ✓/✗ trust lists.</figcaption>
+  </figure>
+  <figure>
+    <img src="references/current-state-5-permissions-screen-recording.png" alt="Screen recording permission step">
+    <figcaption><strong>Step 5 — Screen Recording permission.</strong> Same template as accessibility. Density starting to feel high.</figcaption>
+  </figure>
+  <figure>
+    <img src="references/current-state-6-building.png" alt="Building step">
+    <figcaption><strong>Step 6 — Building.</strong> 0%, "Preparing…", static logo on the right. Continue button visible but faded.</figcaption>
+  </figure>
+</div>
+
+<h2>Recommendations</h2>
+
+<div class="rec">
+<h3>1. Replace the always-on blue gradient with neutral product chrome on most steps</h3>
+<p>The saturated blue gradient looks like a marketing landing page, not a desktop AI tool. Premium peers use gradients sparingly — usually only on <strong>one</strong> hero moment (login/welcome) — and keep the rest of the chrome neutral so the <em>content</em> gets to be the visual moment. Reserve the gradient (or replace it with a quieter one) for the login step only. From profile onward, the right pane should be a clean off-white or near-black surface that lets a <em>real product preview</em> be the visual anchor.</p>
+<pre>TODAY                              PROPOSED (login only keeps hero)
+┌───────┬───────────────┐          ┌───────┬───────────────┐
+│ form  │ █▓▒░ GRADIENT │          │ form  │ █▓▒░ gradient │   ← login
+│       │ ░▒▓█ + card   │          │       │ + product hero│
+└───────┴───────────────┘          └───────┴───────────────┘
+
+PROFILE / INTEGRATIONS / PERMISSIONS / BUILDING
+┌───────┬───────────────────────────────┐
+│       │  neutral surface              │
+│ form  │  ┌─────────────────────────┐  │
+│       │  │ REAL PRODUCT PREVIEW    │  │
+│       │  │ (live updating)         │  │
+│       │  └─────────────────────────┘  │
+└───────┴───────────────────────────────┘</pre>
+</div>
+
+<div class="rec">
+<h3>2. Make the right pane a live preview, not a decorative card</h3>
+<p>This is the <strong>Airtable move</strong> — the best-known win in two-pane onboarding. As the user types their name on the profile step, the right pane shows the actual Highlight UI welcoming them by that name. As they connect Slack, the integrations preview shows a Slack message <em>actually surfacing</em> in a fake meeting brief. The right pane stops being a brochure and becomes a promise the user is helping construct.</p>
+<pre>PROFILE STEP
+┌────────────────┬──────────────────────────────────┐
+│ Your name      │  ┌──── Highlight ──────────┐     │
+│ [Vasudev_____] │  │  Good morning, Vasudev  │     │  ← updates live
+│                │  │  ▸ Meeting in 12 min    │     │
+│ Your role      │  │  ▸ 3 follow-ups due     │     │
+│ [Designer  ▾]  │  └─────────────────────────┘     │
+└────────────────┴──────────────────────────────────┘</pre>
+</div>
+
+<div class="rec">
+<h3>3. Turn "Building your workspace" into a narrated, transparent log</h3>
+<p>A static 0% with "Preparing…" makes the user wonder if the app is broken. Modern AI-app best practice (per Cloudscape, Telerik, NN/g) is <strong>contextual loading messages</strong> that tell the user what's happening <em>now</em> and what's done. Replace the single progress bar with a streaming checklist.</p>
+<pre>BUILDING STEP — proposed
+┌──────────────────────────────────────────┐
+│  Building your workspace                 │
+│  ────────────────────────────────────    │
+│  ✓ Connected Slack (4 channels)          │
+│  ✓ Indexed 142 screenshots               │
+│  ▸ Analyzing recent meetings…  ◐         │
+│  ◌ Personalizing your daily brief        │
+│  ◌ Almost done                           │
+│                                          │
+│  This takes about 90 seconds.            │
+│  You can close this window — we'll       │
+│  ping you when it's ready.               │
+└──────────────────────────────────────────┘</pre>
+<p>Hide the Continue button until complete (or replace with a clear "Notify me when ready" link), and the perceived speed of the whole onboarding goes up even if real time is identical.</p>
+</div>
+
+<div class="rec">
+<h3>4. Pick ONE accent color and use it for meaning only</h3>
+<p>Right now the chartreuse CTA fights every surface it sits on. Premium peers (Stripe, Linear, Vercel) use a single brand accent applied <strong>only</strong> to: primary actions, current-step indication, and positive confirmations. Everything else is neutrals.</p>
+<ul>
+  <li><strong>Keep chartreuse but desaturate it</strong> — ~25% saturation drop, paired with a darker neutral form bg so the CTA reads "premium" not "warning label"</li>
+  <li><strong>Move chartreuse to a darker context</strong> — flip the form pane to near-black; chartreuse pops naturally against dark backgrounds (this is how Linear's indigo works)</li>
+  <li><strong>Cool the chartreuse to a more saturated indigo/violet</strong> — most premium-feeling option, matches the Linear/Vercel/Raycast family</li>
+</ul>
+<p>Whichever you pick, kill the chartreuse when it's <em>disabled</em> (current building-step button looks tappable when it isn't) and never put chartreuse on the gradient — they collide chromatically.</p>
+</div>
+
+<div class="rec">
+<h3>5. Label the stepper segments</h3>
+<p>The current stepper is just colored bars — no labels. Users have no idea what step 3 vs 5 is until they get there. Add tiny labels (under 3 words each) per segment.</p>
+<pre>TODAY:  ━━━━━━━━━━ ─────── ─────── ─────── ─────── ───────
+PROPOSED:
+        ━━━━━━━━━━ ─────── ─────── ─────── ─────── ───────
+        Profile    Connect  Access   Record   Build
+                   ⮕current</pre>
+</div>
+
+<div class="rec">
+<h3>6. Split or collapse the dense permission screens</h3>
+<p>Steps 4 + 5 are nearly identical templates with heavy text at the highest-anxiety moment of the flow.</p>
+<ul>
+  <li><strong>Collapse "We never"</strong> behind a disclosure ("What we <em>don't</em> do →") so the default state has half the text</li>
+  <li><strong>Vary the reassurance copy</strong> per step: accessibility = "We never log keystrokes"; screen recording = "We never store screen frames"</li>
+</ul>
+<p>Also: rename <strong>"Allow access" → "Open System Settings"</strong> (the button doesn't grant the permission — the OS does — and the current label implies a one-tap grant).</p>
+</div>
+
+<div class="rec">
+<h3>7. Show real integration logos in the integrations skeleton</h3>
+<p>Empty grey rectangles tell the user nothing. Showing greyed-out <strong>named</strong> logos (Slack, Linear, Notion, Google Calendar, GitHub) before they're loaded reduces loading anxiety and previews what's coming.</p>
+</div>
+
+<h2>Patterns (table stakes)</h2>
+<ol>
+  <li><strong>One question per screen</strong> — Linear's whole onboarding is "one input per step." Highlight already does this. ✅</li>
+  <li><strong>Skip / "I'll do this later"</strong> on optional steps — Notion, Airtable, Raycast all allow it. Highlight integrations step doesn't.</li>
+  <li><strong>Personalize copy after name capture</strong> — once they type their name in step 2, every subsequent screen addresses them by name.</li>
+  <li><strong>Native macOS visual language</strong> for permission screens — Highlight already does this beautifully. ✅</li>
+  <li><strong>Restrained color</strong> — one accent for meaning, not decoration. Stripe, Linear, Vercel all live by this.</li>
+  <li><strong>Inter / Geist / Söhne</strong> type — Highlight already uses Inter. ✅</li>
+</ol>
+
+<h2>Anti-Patterns</h2>
+<ol>
+  <li><strong>Decorative gradients on persistent surfaces</strong> — gradients are a hero/marketing tool, not chrome.</li>
+  <li><strong>Static "Loading…" with no progress narration</strong> — generic loaders feel broken in an AI app.</li>
+  <li><strong>Empty preview panes</strong> — if you reserve 60% of canvas for a preview, the preview must earn it.</li>
+  <li><strong>Dense permission "trust dumps"</strong> — too many ✓s and ✗s increase cognitive load when users are already anxious.</li>
+  <li><strong>Unlabeled progress bars</strong> — segmented bars without text don't aid wayfinding.</li>
+  <li><strong>Ambiguous CTAs</strong> — "Allow access" implies the button grants permission; it actually opens System Settings.</li>
+</ol>
+
+<h2>Unique Angles (X100 details worth stealing)</h2>
+<ol>
+  <li><strong>Linear's "command palette teaches itself"</strong> — embed your magic-dot shortcut as a tiny footer on each step: <code>⌘ Hold ⌘ anywhere to open Highlight</code>. Teach muscle memory during onboarding.</li>
+  <li><strong>Arc's "playable hero"</strong> — Arc's welcome screen is a live demo, not a static graphic. Make the right pane of step 1 a 6-second looping screen-recording of Highlight in action.</li>
+  <li><strong>Notion's "demo data on the welcome page"</strong> — when building reaches 100%, surface ONE real Highlight artifact (e.g., a generated brief of the user's upcoming meeting) instead of a generic "all done!".</li>
+  <li><strong>Apple HIG "pre-permission priming"</strong> — Highlight already does this; lean in harder with a small animated illustration of the permission in use.</li>
+</ol>
+
+<h2>Findings</h2>
+
+<h3>The visual language problem</h3>
+<p>The layout is correct. The issue is that the two panes speak different visual dialects:</p>
+<ul>
+  <li><strong>Left pane:</strong> muted neutrals, subtle borders, low-contrast subtext. Reads "considered productivity tool."</li>
+  <li><strong>Right pane:</strong> saturated blue gradient + soft floating cards + chartreuse-adjacent CTA on the left. Reads "marketing landing page."</li>
+</ul>
+<p>When a user moves their eyes left-to-right, they're switching mental modes. Premium peers solve this by committing the whole flow to one dialect (Linear's onboarding is monochromatic-and-restrained on both sides) or by using the right pane to actually <em>show product</em>.</p>
+
+<h3>The "static preview" problem</h3>
+<p>Three of the six steps have right-pane content that's basically a logo or empty card (profile, integrations, building). That's 50% of the flow where the right pane is a wasted advert. Airtable's onboarding is the canonical counterexample: as users select options on the left, the right pane <em>renders the artifact they're creating</em>.</p>
+
+<h3>The "static load" problem</h3>
+<p>Loading-state research (Cloudscape, Telerik, NN/g) converges on the same conclusion: <strong>users tolerate long loads if they understand what's happening</strong>. Replace "Preparing…" with a streaming list of done/in-progress/upcoming stages.</p>
+
+<h3>The CTA-color problem</h3>
+<p>Chartreuse on the lower-left of a light form pane, against a saturated-blue right pane, creates a tritone that doesn't read as a designed system. Linear is <em>cool grays plus indigo</em>, full stop. Vercel is near-monochrome plus accent. Stripe is neutrals plus measured indigo. The fix isn't necessarily ditching chartreuse — it's giving it somewhere chromatically calm to live.</p>
+
+<h2>Sources</h2>
+<ul>
+  <li><a href="https://mantlr.com/blog/stripe-linear-vercel-premium-ui">How Stripe, Linear, and Vercel Ship Premium UI — Mantlr</a></li>
+  <li><a href="https://goodux.appcues.com/blog/notions-lightweight-onboarding">Notion's clever onboarding — Appcues</a></li>
+  <li><a href="https://medium.com/design-bootcamp/hands-on-learning-cinematic-transition-linears-thoughtful-onboarding-aa4f16c33d90">Linear's thoughtful onboarding — Medium</a></li>
+  <li><a href="https://www.telerik.com/blogs/loading-ui-ux-patterns-ai-applications">Loading UI/UX Patterns for AI Applications — Telerik</a></li>
+  <li><a href="https://cloudscape.design/patterns/genai/genai-loading-states/">Generative AI loading states — Cloudscape Design System</a></li>
+  <li><a href="https://lollypop.design/blog/2026/february/beyond-the-progress-bar-the-art-of-stepper-ui-design/">The Art of Stepper UI Design — Lollypop</a></li>
+  <li><a href="https://www.candu.ai/blog/airtables-best-wizard-onboarding-flow">Airtable Onboarding Wizard — Candu</a></li>
+  <li><a href="https://www.nngroup.com/articles/permission-requests/">Permission Request Design — NN/g</a></li>
+  <li><a href="https://seedflip.co/blog/vercel-design-system">Vercel Design System Breakdown — SeedFlip</a></li>
+  <li><a href="https://developer.apple.com/design/human-interface-guidelines/privacy">Apple HIG — Privacy</a></li>
+  <li><a href="https://www.saasui.design/pattern/onboarding/arc-browser">Arc Browser Onboarding — SaaSUI</a></li>
+  <li><a href="https://pageflows.com/post/mac-os/onboarding/arc/">Arc Desktop Onboarding — Page Flows</a></li>
+  <li><a href="https://pageflows.com/post/desktop-web/onboarding/linear/">Linear Onboarding Flow — Page Flows</a></li>
+</ul>
+
+</main>
+</body>
+</html>
