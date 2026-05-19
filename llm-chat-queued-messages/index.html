@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Design Research — Queued Messages in LLM Chat Apps</title>
+<style>
+  :root {
+    --fg: #111;
+    --muted: #555;
+    --bg: #fafaf7;
+    --card: #fff;
+    --accent: #1f5fff;
+    --rule: #e6e6e0;
+    --code-bg: #f3f3ef;
+  }
+  html, body { background: var(--bg); color: var(--fg); }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, system-ui, sans-serif;
+    line-height: 1.55;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 28px 96px;
+    font-size: 16px;
+  }
+  h1 { font-size: 34px; line-height: 1.15; margin: 0 0 8px; letter-spacing: -0.02em; }
+  h2 { font-size: 22px; margin: 44px 0 12px; letter-spacing: -0.01em; border-top: 1px solid var(--rule); padding-top: 28px; }
+  h3 { font-size: 17px; margin: 24px 0 8px; }
+  p { margin: 10px 0 14px; }
+  ul, ol { padding-left: 22px; margin: 8px 0 16px; }
+  li { margin: 6px 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    margin: 12px 0 6px;
+    border: 1px solid var(--rule);
+  }
+  figure { margin: 24px 0; }
+  figcaption { color: var(--muted); font-size: 14px; font-style: italic; }
+  .tldr {
+    background: #eaf0ff;
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 16px 0 28px;
+  }
+  .tldr h2 { border: none; padding: 0; margin: 0 0 6px; font-size: 16px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); }
+  pre, code {
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size: 13px;
+  }
+  pre {
+    background: var(--code-bg);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    line-height: 1.4;
+  }
+  ol.recs > li { margin: 14px 0; }
+  ol.recs strong { color: var(--fg); }
+  .meta { color: var(--muted); font-size: 14px; margin-bottom: 36px; }
+</style>
+</head>
+<body>
+
+<h1>Queued Messages in LLM Chat Apps</h1>
+<p class="meta">Design research · 2026-05-18</p>
+
+<div class="tldr">
+  <h2>TL;DR</h2>
+  <p>None of the big LLM chat apps (ChatGPT, Claude, Gemini, Copilot) ship native message queuing — the consistent native pattern is <strong>disable send + show stop button</strong> while streaming, and users have built a Chrome-extension cottage industry to fill the gap. The emerging "right answer" pattern, validated by ChatGPT Queue (extension) and Cursor (feature request hotly upvoted): let the user keep typing, hold pending messages <strong>as ghost-styled bubbles right above the composer</strong>, allow edit/delete before they fire, then drain the queue sequentially when streaming completes.</p>
+</div>
+
+<h2>Recommendations / Next Steps</h2>
+
+<ol class="recs">
+  <li><strong>Always-typeable composer.</strong> Never disable the textarea while streaming. Pressing Enter while a response is in flight should enqueue, not no-op. The send icon morphs into a "queue" icon (e.g. ⏱ or +) to signal the change in behavior. ChatGPT, Claude, and Gemini all currently <em>block</em> this — that's the gap to exploit.</li>
+  <li><strong>Queued messages live above the composer as ghost bubbles.</strong> Don't insert them into the chat thread (that lies about send order and conflates "sent" with "queued"). Render them as a stack of muted/dashed-border user bubbles directly above the input, with each row showing the text, an edit pencil, and a delete ×.</li>
+  <li><strong>Stop ≠ Cancel queue.</strong> The streaming stop button cancels the <em>current</em> generation only. Queued items should still fire. Provide a separate "clear queue" affordance so users can abort the pipeline without aborting the current response.</li>
+  <li><strong>Drain visibly, not invisibly.</strong> When streaming ends, animate the top queued bubble <em>sliding down</em> into the chat as the new user turn. Silent insertion makes queued messages feel lost.</li>
+  <li><strong>Per-message status icons (small).</strong> Tiny glyph inside each queued bubble: ⏱ queued, ↑ sending, ⏵ streaming response. The bubble's <em>position</em> (above composer vs. in thread) is already 90% of the signal.</li>
+  <li><strong>Cap the queue and warn at the limit.</strong> 5 is plenty. Unbounded queues invite stream-of-consciousness Enter-mashing and a wall of robotic answers the user didn't actually want.</li>
+  <li><strong>Make queued context visible in the prompt sent to the model.</strong> When message #2 fires, prepend a note like <em>"User also queued these follow-ups while you were responding: …"</em> — lets the model batch or reorder.</li>
+</ol>
+
+<h3>ASCII: composer states</h3>
+
+<p><strong>Idle:</strong></p>
+<pre>┌──────────────────────────────────────────────┐
+│ Ask anything…                            [↑] │
+└──────────────────────────────────────────────┘</pre>
+
+<p><strong>Streaming, queue empty (today's status quo):</strong></p>
+<pre>  Assistant: Lorem ipsum dolor sit amet, conse▌
+  ────────────────────────────────────────────
+┌──────────────────────────────────────────────┐
+│ Type to queue a follow-up…              [■] │ ← stop streaming
+└──────────────────────────────────────────────┘</pre>
+
+<p><strong>Streaming, with 2 queued messages (proposed):</strong></p>
+<pre>  Assistant: Lorem ipsum dolor sit amet, conse▌
+  ────────────────────────────────────────────
+  ┌─ Queue (2) ────────────────────── clear × ┐
+  │ ┌──────────────────────────────────────┐  │
+  │ │ ⏱ also explain the time complexity  ✎×│  │ ← ghost bubble, muted bg
+  │ └──────────────────────────────────────┘  │
+  │ ┌──────────────────────────────────────┐  │
+  │ │ ⏱ and rewrite it in Rust            ✎×│  │
+  │ └──────────────────────────────────────┘  │
+  └──────────────────────────────────────────  ┘
+┌──────────────────────────────────────────────┐
+│ Add another…                            [⏱] │ ← send becomes "enqueue"
+└──────────────────────────────────────────────┘
+                         [■] stop current response (separate)</pre>
+
+<p><strong>Just drained (msg #1 sliding into thread):</strong></p>
+<pre>  Assistant: …final paragraph done.
+  You: also explain the time complexity   ← slid in from queue
+  Assistant: ▌                             ← starts immediately
+  ────────────────────────────────────────────
+  ┌─ Queue (1) ──────────────────────────────┐
+  │ ⏱ and rewrite it in Rust            ✎ × │
+  └──────────────────────────────────────────┘</pre>
+
+<h2>Key Examples</h2>
+
+<figure>
+  <img src="references/bitrig-ai-streaming-stop.png" alt="Bitrig AI chat streaming with stop button" />
+  <figcaption>Bitrig (mobile) — Mid-stream state with typing spinner and an inline stop/cancel button in the composer. Composer is still typeable, which is the prerequisite for any queueing behavior. The status updates above ("updated icon", "renamed project", "edited code") double as a progress log so the user knows <em>what</em> they'd be queueing on top of. [Lazyweb]</figcaption>
+</figure>
+
+<h2>Patterns</h2>
+
+<p><strong>Universal in 2026 native LLM chats</strong> (ChatGPT, Claude, Gemini, Copilot, Perplexity):</p>
+<ul>
+  <li>Send button morphs into stop (■) the moment streaming begins.</li>
+  <li>Textarea remains editable but Enter is a no-op until streaming ends. <em>(This is the friction users are complaining about.)</em></li>
+  <li>The assistant's in-progress bubble shows a caret/cursor blink or shimmer to signal liveness.</li>
+  <li>No queue, no buffer — if you press Enter early it's lost.</li>
+</ul>
+
+<p><strong>Common across queue-enabling extensions and agent IDEs</strong> (ChatGPT Queue, Cursor, agentic coding tools):</p>
+<ul>
+  <li>Queue appears <em>above</em> the composer, not in the thread.</li>
+  <li>Per-item edit + delete affordances.</li>
+  <li>Sequential drain (FIFO).</li>
+  <li>Visual differentiation from sent messages: dashed border, lower opacity, distinct background.</li>
+</ul>
+
+<h2>Anti-Patterns</h2>
+<ul>
+  <li><strong>Disabling the textarea entirely.</strong> Kills flow-of-thought capture.</li>
+  <li><strong>Inserting queued messages into the chat thread immediately.</strong> Confuses send order and breaks the model's view of conversation.</li>
+  <li><strong>Auto-merging queued messages into one big prompt.</strong> Tempting, but changes user intent. Send sequentially.</li>
+  <li><strong>Silent queue drain.</strong> Users wonder if they accidentally sent it again. Animate the transition.</li>
+  <li><strong>Hiding queue length.</strong> Always show count.</li>
+  <li><strong>Conflating "stop generating" with "clear queue".</strong> Different intents, different buttons.</li>
+</ul>
+
+<h2>Unique Angles</h2>
+<ul>
+  <li><strong>Cursor's "background agent" framing.</strong> Treats long-running tasks as something you walk away from — so queued messages double as a backlog you populate while the agent works. Reframing queue as <em>intentional planning</em> (vs. <em>waiting room</em>) opens different patterns: numbered todos, drag-to-reorder, even a "send all as one plan" merge button as an explicit choice.</li>
+  <li><strong>The status-log composer.</strong> Bitrig blends progress events ("renamed project", "edited code") into the area right above the composer. Exactly the context you want visible while queueing — you can reference newly-renamed files in your follow-up.</li>
+  <li><strong>Cap the queue, not just for UX but for cost.</strong> Each queued message is a full turn — easy way for a user to run up a $5 Opus bill by mashing Enter.</li>
+</ul>
+
+<h2>Findings</h2>
+
+<p>The research landscape is asymmetric: <strong>near-zero native support, heavy unmet demand</strong>.</p>
+<ul>
+  <li>OpenAI forum thread "Feature Request: Message queue while GPT is generating responses" remains open and active in 2026.</li>
+  <li>Cursor's "Queue Agent Messages" feature request is a recurring forum thread; Cursor has partially shipped it as "Add follow-up".</li>
+  <li>Multiple Chrome extensions (ChatGPT Queue, ChatGPT Message Queue, queue-chatgpt) exist specifically to retrofit this onto ChatGPT.</li>
+  <li>The Lazyweb screenshot corpus has <strong>no clean examples of queued state in any major LLM chat</strong>. That absence is itself the finding: this is greenfield UX.</li>
+</ul>
+
+<p>Adjacent precedent worth borrowing:</p>
+<ul>
+  <li><strong>iMessage's send-while-offline behavior</strong>: outbox messages render in the thread but greyed out with a small clock icon. Lift the visual treatment (muted color, status glyph) without lifting the placement.</li>
+  <li><strong>Slack's draft system</strong>: visibility model — small indicator near input, not in thread — is what we want.</li>
+  <li><strong>Email outbox</strong>: same primitive applied to a different bottleneck (model latency instead of network).</li>
+</ul>
+
+<h2>Sources</h2>
+<ul>
+  <li><a href="https://learnersbucket.substack.com/p/create-a-ui-for-queued-chat-like">Create a UI for queued chat like ChatGPT and Claude — learnersbucket</a></li>
+  <li><a href="https://community.openai.com/t/feature-request-message-queue-while-gpt-is-generating-responses/1155949">Feature Request: Message queue while GPT is generating responses — OpenAI Developer Community</a></li>
+  <li><a href="https://community.openai.com/t/queue-up-messages-for-chatgpt/741089">Queue up messages for ChatGPT — OpenAI Developer Community</a></li>
+  <li><a href="https://chromewebstore.google.com/detail/chatgpt-message-queue/bdeaocefmnkeinfiknfeahpghemjjgjo">ChatGPT Message Queue (Chrome extension)</a></li>
+  <li><a href="https://chromewebstore.google.com/detail/chatgpt-queue-save-time-w/iabnajjakkfbclflgaghociafnjclbem">ChatGPT Queue — Save Time with Prompt Chains and Bulk Prompting</a></li>
+  <li><a href="https://github.com/gstohl/queue-chatgpt">queue-chatgpt (GitHub)</a></li>
+  <li><a href="https://thefrontkit.com/blogs/ai-chat-ui-best-practices">AI Chat UI Best Practices — thefrontkit</a></li>
+  <li><a href="https://cursor.com/blog/agent-best-practices">Best practices for coding with agents — Cursor</a></li>
+  <li><a href="https://agentic-design.ai/patterns/ui-ux-patterns/chat-interface-patterns">Chat Interface Patterns — Agentic Design</a></li>
+  <li><a href="https://hatchworks.com/blog/ai-agents/agent-ux-patterns/">Agent UX Patterns — Hatchworks</a></li>
+  <li><a href="https://www.smashingmagazine.com/2025/07/design-patterns-ai-interfaces/">Design Patterns For AI Interfaces — Smashing Magazine</a></li>
+</ul>
+
+</body>
+</html>
