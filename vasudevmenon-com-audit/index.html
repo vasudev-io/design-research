@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Design Audit: vasudevmenon.com</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://rsms.me/">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #18181b;
+    --muted: #52525b;
+    --subtle: #a1a1aa;
+    --rule: #e4e4e7;
+    --surface: #fafafa;
+    --code-bg: #f4f4f5;
+    --callout: #eaf2fb;
+    --callout-border: #5b8def;
+    --why: #faf7f1;
+    --why-border: #b9a878;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
+    font-size: 16px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 80px 24px 120px; }
+  header.page-header { margin-bottom: 48px; }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin: 0 0 10px;
+  }
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    margin: 64px 0 16px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin: 40px 0 12px;
+  }
+  .page-header .meta { color: var(--muted); font-size: 14px; margin: 0; }
+  p { margin: 0 0 16px; color: var(--text); }
+  ul, ol { padding-left: 22px; margin: 0 0 16px; }
+  ul li, ol li { margin: 4px 0; }
+  a {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s;
+  }
+  a:hover { text-decoration-color: var(--text); }
+  code {
+    background: var(--code-bg);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  }
+  pre {
+    background: var(--code-bg);
+    padding: 16px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 12.5px;
+    line-height: 1.55;
+    border: 1px solid var(--rule);
+    margin: 20px 0;
+  }
+  pre code { background: transparent; padding: 0; border-radius: 0; font-size: inherit; }
+  strong { font-weight: 600; color: var(--text); }
+  hr { border: none; border-top: 1px solid var(--rule); margin: 48px 0; }
+  figure {
+    margin: 24px 0;
+    padding: 0;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  figure img { width: 100%; height: auto; display: block; }
+  figcaption {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 12px 16px;
+    border-top: 1px solid var(--rule);
+    background: var(--bg);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14.5px;
+  }
+  th, td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  th { font-weight: 600; color: var(--text); border-bottom: 1px solid #d4d4d8; }
+  td img { max-width: 140px; height: auto; border-radius: 4px; border: 1px solid var(--rule); display: block; }
+  .tldr {
+    background: var(--callout);
+    border-left: 4px solid var(--callout-border);
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 24px 0 32px;
+  }
+  .why {
+    background: var(--why);
+    padding: 12px 16px;
+    border-radius: 6px;
+    border-left: 3px solid var(--why-border);
+    font-size: 14.5px;
+    margin: 12px 0 16px;
+  }
+  .pill {
+    display: inline-block;
+    background: #18181b; color: #fafafa;
+    padding: 2px 10px; border-radius: 999px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .star { color: #d97706; }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--subtle);
+    font-size: 13px;
+    text-decoration: none;
+    margin-bottom: 32px;
+  }
+  .back-link:hover { color: var(--text); }
+  @media (max-width: 720px) {
+    .wrap { padding: 56px 20px 80px; }
+    h1 { font-size: 32px; }
+    h2 { font-size: 22px; margin-top: 48px; padding-top: 24px; }
+    td img { max-width: 100px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back-link" href="../">← Design research</a>
+
+<header class="page-header">
+  <p class="eyebrow">Audit</p>
+  <h1>Design Audit: vasudevmenon.com</h1>
+  <p class="meta">May 24, 2026 · personal site · canvas portfolio · phase-8 polish</p>
+</header>
+
+<div class="tldr">
+<strong>TL;DR.</strong> The site is a beautifully crafted canvas — custom cursor, tilt, magnifying dock, intro burst — but a first-time visitor lands and can't tell <strong>who you are or what you do</strong> without clicking. Five near-identical dark folder cards dominate the viewport while your name sits as a tiny pill in the corner. The single biggest lift: a visible identity statement at the top of the canvas so the work has someone to belong to.
+</div>
+
+<h2>Current state</h2>
+<figure>
+  <img src="references/current.png" alt="Current vasudevmenon.com canvas" />
+  <figcaption>vasudevmenon.com canvas — captured at 1440×900. Five experience folders dominate the middle band, the dock floats between them, the name appears as a small pill top-left, project artifacts cluster around the edges. Canvas/Simple toggle is the only obvious affordance.</figcaption>
+</figure>
+
+<h2>Improvement ideas</h2>
+
+<h3>1. Give yourself a hero <span class="star">★</span> <small>(highest impact)</small></h3>
+<p>Right now the "vasudev menon" pill is so small it reads as a logo for the dock UI, not as the person behind the site. Three of the four most-similar references hit you with name + role within the first second.</p>
+
+<p><strong>Inspired by:</strong></p>
+<figure>
+  <img src="references/pnguin-app-icons-row.png" alt="pnguin.app hero" />
+  <figcaption>pnguin.app — <code>Hello 👋 / I'm Shihab, and I make apps.</code> placed top-left in display weight. <span class="pill">Lazyweb</span></figcaption>
+</figure>
+<figure>
+  <img src="references/egstad-bold-hero.png" alt="Egstad name as hero" />
+  <figcaption>egstad.com — name set huge across the viewport on a near-identical warm cream background. The name IS the hero. <span class="pill">Lazyweb</span></figcaption>
+</figure>
+
+<div class="why"><strong>Why this works.</strong> Both visitors and recruiters need to answer "who is this and why am I here?" in under a second. The line already exists in <code>data/profile.ts</code> ("Design engineer building AI-native products…"). Move it onto the canvas itself, not behind a card click.</div>
+
+<pre><code>┌──────────────────────────────────────────────────────────┐
+│  vasudev menon                          [Canvas][Simple] │
+│  design engineer · ai-native products                    │
+│                                                          │
+│   ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐                    │
+│   │ HL │ │ IN │ │ MB │ │ OC │ │ TA │   (experiences)    │
+│   └────┘ └────┘ └────┘ └────┘ └────┘                    │
+│                                                          │
+│         ┌─────────── DOCK ────────────┐                  │
+│         └─────────────────────────────┘                  │
+└──────────────────────────────────────────────────────────┘</code></pre>
+
+<p>Keep the cute pill — but add the tagline beneath it in Instrument Serif italic to leverage the editorial font already in the scale.</p>
+
+<h3>2. Anchor the dock to the bottom</h3>
+<p>The dock currently floats roughly mid-canvas. Anyone with a Mac expects a dock at bottom-center; placing it in the middle reads as "decoration that looks like a dock" instead of "the dock, your nav." It also fights the experience cards for vertical real estate.</p>
+
+<div class="why"><strong>Why this works.</strong> Bottom-anchored docks free the middle band for content, signal "this is interactive" via convention, and let the magnification effect feel earned (because it's where users instinctively send their cursor).</div>
+
+<pre><code>┌──────────────────────────────────────────────────────────┐
+│  vasudev menon  → tagline                                │
+│                                                          │
+│   experience row · projects · about                      │
+│                                                          │
+│                  (breathing room)                        │
+│                                                          │
+│             ┌─[ DOCK · centered · floats ]─┐             │
+└─────────────└────────────────────────────────┘──── 20px ─┘</code></pre>
+
+<h3>3. Differentiate the five experience cards</h3>
+<p>The five company cards read as a row of near-identical dark folders. The per-company colour theming (charcoalGrid, forest, royal, midnightDots, slate) is too subtle on first look — at thumbnail size most viewers can't tell them apart, so they don't bother scanning.</p>
+
+<p><strong>Inspired by:</strong></p>
+<figure>
+  <img src="references/meanterm-list-thumbnails.png" alt="Meanterm — list of apps" />
+  <figcaption>meanterm.com — each project gets a full row: name, tagline, distinct circular icons. Nothing competes. <span class="pill">Lazyweb</span></figcaption>
+</figure>
+
+<div class="why"><strong>Why this works.</strong> Pick the cheapest fix: (a) make logos/wordmarks ~2× larger so Highlight AI, Invaai etc. are recognisable at thumbnail size, (b) lift the company tint from ~5% to ~25% of the card so each card has a clear "this is the green one / blue one" cue, or (c) reduce the row from 5 cards to 3 visible + a "+2 more" affordance so each card gets more space.</div>
+
+<h3>4. Promote the projects out of the margins</h3>
+<p>The standalone projects (the polaroid scatter, the controller image, the dot-matrix video) are some of the most visually interesting content on the canvas — but they sit in the bottom-right corner at thumb size compared to the experience row. They read as decoration.</p>
+
+<p><strong>Inspired by:</strong></p>
+<figure>
+  <img src="references/claudio-guglieri-feed.png" alt="Claudio Guglieri — work as the hero" />
+  <figcaption>guglieri.com — designer's portfolio leads with a feed grid of work thumbnails at meaningful size, with a single editorial line "An archive of everything from early sketches to finished products." <span class="pill">Lazyweb</span></figcaption>
+</figure>
+
+<div class="why"><strong>Why this works.</strong> Recruiters and peers care about <em>what you've shipped</em>, not just <em>where you've worked</em>. Either give projects their own labeled band ("Selected work" header, scale up the polaroids), or rebalance so the project zone is a peer to the experience row, not a footer.</div>
+
+<h3>5. Add a "you can interact with this" hint</h3>
+<p>A new visitor staring at the canvas right now has no signal that things are draggable, hoverable, or zoomable. The custom cursor flips on hover, but only after they've already moved their mouse over something — and most users skim with their eyes first. The Canvas / Simple toggle is the only visible affordance.</p>
+
+<p><strong>Inspired by:</strong></p>
+<figure>
+  <img src="references/jordan-hughes-hero-bio.png" alt="Jordan Hughes — minimal portfolio" />
+  <figcaption>jordanhughes.co — sparse but every clickable region (Projects, About, Reading, social row) is in plain sight. The visitor never has to guess. <span class="pill">Lazyweb</span></figcaption>
+</figure>
+
+<div class="why"><strong>Why this works.</strong> No need to abandon the canvas metaphor — just add one small hint. Cheapest first: (a) a faint "drag · click · explore" line near the dock, (b) a one-time tooltip pointing at one card on first load, (c) a subtle pulse on one card after 3 s of idle.</div>
+
+<h2>What's working</h2>
+<p>Don't change these — they're what makes the site memorable:</p>
+<ul>
+  <li><strong>The warm linen background</strong> (<code>#f4f0eb</code>). Distinctive, calm, makes the site stand out from the wall of dark-mode portfolios.</li>
+  <li><strong>The custom cursor + tilt + dock magnification.</strong> Each alone is a craft signal. Together they read "this person ships polished UI."</li>
+  <li><strong>The intro burst → artifacts settle sequence.</strong> Unique entrance moment. Don't lose this — just make sure the <em>final</em> state (post-intro) carries identity (idea 1).</li>
+  <li><strong>The Canvas / Simple two-tier architecture.</strong> Smart inclusive design. Most portfolios miss this entirely.</li>
+  <li><strong>The font pairing (Geist + Instrument Serif).</strong> Editorial serif callouts in italic give the page a personal voice without needing more copy. Use it for the tagline (idea 1).</li>
+</ul>
+
+<h2>All references</h2>
+<table>
+  <thead><tr><th></th><th>Source</th><th>Pattern</th><th>Provenance</th></tr></thead>
+  <tbody>
+    <tr><td><img src="references/pnguin-app-icons-row.png" alt="" /></td><td><a href="https://www.pnguin.app/">pnguin.app</a></td><td>Top-left hello + name + role in display text</td><td><span class="pill">Lazyweb</span></td></tr>
+    <tr><td><img src="references/egstad-bold-hero.png" alt="" /></td><td><a href="https://egstad.com/">egstad.com</a></td><td>Name as massive type on warm cream background</td><td><span class="pill">Lazyweb</span></td></tr>
+    <tr><td><img src="references/jordan-hughes-hero-bio.png" alt="" /></td><td><a href="https://jordanhughes.co/">jordanhughes.co</a></td><td>Single-line bio top-left, visible nav, person photo, social row</td><td><span class="pill">Lazyweb</span></td></tr>
+    <tr><td><img src="references/meanterm-list-thumbnails.png" alt="" /></td><td><a href="https://meanterm.com/">meanterm.com</a></td><td>Each project gets a full breathing row with distinct icons</td><td><span class="pill">Lazyweb</span></td></tr>
+    <tr><td><img src="references/claudio-guglieri-feed.png" alt="" /></td><td><a href="https://guglieri.com/feed">guglieri.com</a></td><td>Work feed as hero with editorial tagline</td><td><span class="pill">Lazyweb</span></td></tr>
+    <tr><td><img src="references/intercom-ciaran-profile.png" alt="" /></td><td><a href="https://www.intercom.com/about/ciaran-lee">intercom.com/.../ciaran-lee</a></td><td>Founder profile with categorized content sections — alternative for a simpler default</td><td><span class="pill">Lazyweb</span></td></tr>
+  </tbody>
+</table>
+
+</div>
+</body>
+</html>
